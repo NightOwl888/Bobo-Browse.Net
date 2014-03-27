@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E22CE67-E8FC-41CE-8C4A-33EA494B375A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BoboBrowse</RootNamespace>
+    <AssemblyName>BoboBrowse.Net</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Deployment\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\BoboBrowse.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C5">
+      <HintPath>..\DllReferences\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\DllReferences\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\DllReferences\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.cs">
+      <Link>Version.cs</Link>
+    </Compile>
+    <Compile Include="Api\BoboBrowser.cs" />
+    <Compile Include="Api\BoboIndexReader.cs" />
+    <Compile Include="Api\IBrowsable.cs" />
+    <Compile Include="Api\BrowseException.cs" />
+    <Compile Include="Api\BrowseFacet.cs" />
+    <Compile Include="Api\BrowseHit.cs" />
+    <Compile Include="Api\BrowseRequest.cs" />
+    <Compile Include="Api\BrowseResult.cs" />
+    <Compile Include="Api\BrowseSelection.cs" />
+    <Compile Include="Api\IComparatorFactory.cs" />
+    <Compile Include="Api\IFacetAccessible.cs" />
+    <Compile Include="Api\FacetSpec.cs" />
+    <Compile Include="Api\IFieldValueAccessor.cs" />
+    <Compile Include="Api\MappedFacetAccessible.cs" />
+    <Compile Include="Api\MultiBoboBrowser.cs" />
+    <Compile Include="Api\RangeFacet.cs" />
+    <Compile Include="Api\TopDocsSortedHitCollector.cs" />
+    <Compile Include="client\BoboCmdlineApp.cs" />
+    <Compile Include="client\BrowseRequestBuilder.cs" />
+    <Compile Include="client\BrowseResultFormatter.cs" />
+    <Compile Include="docidset\BitsetDocSet.cs" />
+    <Compile Include="docidset\EmptyDocIdSet.cs" />
+    <Compile Include="docidset\FilteredDocSetIterator.cs" />
+    <Compile Include="docidset\RandomAccessDocIdSet.cs" />
+    <Compile Include="Facets\data\FacetDataCache.cs" />
+    <Compile Include="Facets\data\MultiValueFacetDataCache.cs" />
+    <Compile Include="Facets\data\PredefinedTermListFactory.cs" />
+    <Compile Include="Facets\data\TermDateList.cs" />
+    <Compile Include="Facets\data\TermDoubleList.cs" />
+    <Compile Include="Facets\data\TermFloatList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Facets\data\TermIntList.cs" />
+    <Compile Include="Facets\data\TermListFactory.cs" />
+    <Compile Include="Facets\data\TermLongList.cs" />
+    <Compile Include="Facets\data\TermStringList.cs" />
+    <Compile Include="Facets\data\TermValueList.cs" />
+    <Compile Include="Facets\IFacetCountCollector.cs" />
+    <Compile Include="Facets\FacetHandler.cs" />
+    <Compile Include="Facets\IFacetHandlerFactory.cs" />
+    <Compile Include="Facets\filter\AndFilter.cs" />
+    <Compile Include="Facets\filter\CompactMultiValueFacetFilter.cs" />
+    <Compile Include="Facets\filter\EmptyFilter.cs" />
+    <Compile Include="Facets\filter\FacetFilter.cs" />
+    <Compile Include="Facets\filter\FacetOrFilter.cs" />
+    <Compile Include="Facets\filter\FacetRangeFilter.cs" />
+    <Compile Include="Facets\filter\FilterMapFacetHandler.cs" />
+    <Compile Include="Facets\filter\MultiValueFacetFilter.cs" />
+    <Compile Include="Facets\filter\MultiValueORFacetFilter.cs" />
+    <Compile Include="Facets\filter\NotFilter.cs" />
+    <Compile Include="Facets\filter\OrFilter.cs" />
+    <Compile Include="Facets\filter\RandomAccessAndFilter.cs" />
+    <Compile Include="Facets\filter\RandomAccessFilter.cs" />
+    <Compile Include="Facets\filter\RandomAccessNotFilter.cs" />
+    <Compile Include="Facets\filter\RandomAccessOrFilter.cs" />
+    <Compile Include="Facets\impl\CompactMultiValueFacetHandler.cs" />
+    <Compile Include="Facets\impl\DefaultFacetCountCollector.cs" />
+    <Compile Include="Facets\impl\DynamicRangeFacetHandler.cs" />
+    <Compile Include="Facets\impl\FacetHitcountComparatorFactory.cs" />
+    <Compile Include="Facets\impl\FilteredRangeFacetHandler.cs" />
+    <Compile Include="Facets\impl\MultiValueFacetHandler.cs" />
+    <Compile Include="Facets\impl\PathFacetHandler.cs" />
+    <Compile Include="Facets\impl\RangeFacetCountCollector.cs" />
+    <Compile Include="Facets\impl\RangeFacetHandler.cs" />
+    <Compile Include="Facets\impl\SimpleFacetHandler.cs" />
+    <Compile Include="Facets\impl\SimpleGroupbyFacetHandler.cs" />
+    <Compile Include="Facets\statistics\ChiSquaredFacetCountStatisticsGenerator.cs" />
+    <Compile Include="Facets\statistics\FacetCountStatisicsGenerator.cs" />
+    <Compile Include="Facets\statistics\FacetCountStatistics.cs" />
+    <Compile Include="fields\FieldRegistry.cs" />
+    <Compile Include="impl\BrowseServiceImpl.cs" />
+    <Compile Include="impl\DefaultBrowseServiceImpl.cs" />
+    <Compile Include="impl\QueryProducer.cs" />
+    <Compile Include="impl\SortedFieldBrowseHitComparator.cs" />
+    <Compile Include="LangUtils\Array.cs" />
+    <Compile Include="LangUtils\FloatUtils.cs" />
+    <Compile Include="LangUtils\Properties.cs" />
+    <Compile Include="LangUtils\RuntimeException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="query\DocsetQuery.cs" />
+    <Compile Include="query\FastMatchAllDocsQuery.cs" />
+    <Compile Include="query\scoring\BoboDocScorer.cs" />
+    <Compile Include="query\scoring\IBoboFacetTermQueryBuilder.cs" />
+    <Compile Include="query\scoring\DefaultFacetTermScoringFunction.cs" />
+    <Compile Include="query\scoring\DefaultFacetTermScoringFunctionFactory.cs" />
+    <Compile Include="query\scoring\IFacetScoreable.cs" />
+    <Compile Include="query\scoring\FacetTermQuery.cs" />
+    <Compile Include="query\scoring\IFacetTermScoringFunction.cs" />
+    <Compile Include="query\scoring\IFacetTermScoringFunctionFactory.cs" />
+    <Compile Include="Search\BoboSearcher.cs" />
+    <Compile Include="Search\BoboSearcher2.cs" />
+    <Compile Include="Search\FacetHitCollector.cs" />
+    <Compile Include="Search\InternalBrowseHitCollector.cs" />
+    <Compile Include="Search\LuceneSortDocComparatorFactory.cs" />
+    <Compile Include="Search\MultiTopDocsSortedHitCollector.cs" />
+    <Compile Include="Search\SortedHitQueue.cs" />
+    <Compile Include="Search\SortFieldEntry.cs" />
+    <Compile Include="service\BoboService.cs" />
+    <Compile Include="service\IBrowseQueryParser.cs" />
+    <Compile Include="service\BrowseService.cs" />
+    <Compile Include="service\BrowseServiceFactory.cs" />
+    <Compile Include="service\DefaultBrowseQueryParser.cs" />
+    <Compile Include="service\HitCompareMulti.cs" />
+    <Compile Include="Util\BigByteArray.cs" />
+    <Compile Include="Util\BigFloatArray.cs" />
+    <Compile Include="Util\BigIntArray.cs" />
+    <Compile Include="Util\BigIntBuffer.cs" />
+    <Compile Include="Util\BigNestedIntArray.cs" />
+    <Compile Include="Util\BigSegmentedArray.cs" />
+    <Compile Include="Util\BigShortArray.cs" />
+    <Compile Include="Util\BoundedPriorityQueue.cs" />
+    <Compile Include="Util\ListMerger.cs" />
+    <Compile Include="Util\StringArrayComparator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucene.Ext\LuceneExt.Net.csproj">
+      <Project>{D1BC5392-B1CA-4DD8-BE79-1653E6A8B34E}</Project>
+      <Name>LuceneExt.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\BoboBrowse.snk">
+      <Link>BoboBrowse.snk</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
