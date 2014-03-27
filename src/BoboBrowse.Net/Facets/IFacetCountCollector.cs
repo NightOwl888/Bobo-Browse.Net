@@ -4,6 +4,8 @@ using BoboBrowse.Api;
 namespace BoboBrowse.Facets
 {
     ///<summary>Collects facet counts for a given browse request </summary>
+    using System.Collections.Generic;
+
     public interface IFacetCountCollector : IFacetAccessible
     {
         ///<summary>Collect a hit. This is called for every hit, thus the implementation needs to be super-optimized. </summary>

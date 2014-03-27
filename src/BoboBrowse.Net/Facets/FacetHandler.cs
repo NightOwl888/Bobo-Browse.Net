@@ -1,5 +1,28 @@
 #region using
+//* that handles various types of semi-structured data.  Written in Java.
+//* 
+//* Copyright (C) 2005-2006  John Wang
+//*
+//* This library is free software; you can redistribute it and/or
+//* modify it under the terms of the GNU Lesser General Public
+//* License as published by the Free Software Foundation; either
+//* version 2.1 of the License, or (at your option) any later version.
+//*
+//* This library is distributed in the hope that it will be useful,
+//* but WITHOUT ANY WARRANTY; without even the implied warranty of
+//* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//* Lesser General Public License for more details.
+//*
+//* You should have received a copy of the GNU Lesser General Public
+//* License along with this library; if not, write to the Free Software
+//* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+//* 
+//* To contact the project administrators for the bobo-browse project, 
+//* please go to https://sourceforge.net/projects/bobo-browse/, or 
+//* send mail to owner@browseengine.com. 
 
+namespace BoboBrowse.Net.Facets
+{
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -29,9 +52,16 @@ namespace BoboBrowse.Facets
             Large
         }
 
+        private readonly Dictionary<string, FacetHandler> _dependedFacetHandlers;       
+
         protected FacetHandler(string name)
             : this(name, null)
+        protected FacetHandler(string name, IEnumerable<string> dependsOn)
         {
+            this.Name = name;
+            this.DependsOn = dependsOn == null ? new List<string>() : new List<string>(dependsOn);
+            this._dependedFacetHandlers = new Dictionary<string, FacetHandler>();
+            this.TermCountSizeFlag = TermCountSize.Large;
         }
 
         ///	 <summary> * Constructor </summary>
@@ -52,22 +82,40 @@ namespace BoboBrowse.Facets
         public virtual void SetTermCountSize(string termCountSize)
         {
             SetTermCountSize((TermCountSize) Enum.Parse(typeof (TermCountSize), termCountSize.ToLower()));
+
+            foreach (string val in vals)
+            {
+                RandomAccessFilter f = BuildRandomAccessFilter(val, prop);
+                if (f != null && !(f is EmptyFilter))
+                {
+                    filterList.Add(f);
         }
+            }
 
         public virtual void SetTermCountSize(TermCountSize termCountSize)
+            if (filterList.Count == 0)
         {
             this.termCountSize = termCountSize;
         }
+            else
+            {
+                finalFilter = new RandomAccessOrFilter(filterList);
+            }
 
         public virtual TermCountSize GetTermCountSize()
         {
+                finalFilter = new RandomAccessNotFilter(finalFilter);
+            }
             return termCountSize;
         }
 
+        #region Properties
+        /// <summary>
         ///	 <summary> * Gets the name </summary>
         ///	 * <returns> name </returns>
         public string Name
         {
+            get;
             get { return name; }
         }
 
@@ -77,6 +125,7 @@ namespace BoboBrowse.Facets
         ///	 
         public List<string> GetDependsOn()
         {
+            get;
             return dependsOn;
         }
 
@@ -87,7 +136,9 @@ namespace BoboBrowse.Facets
         public void PutDependedFacetHandler(FacetHandler facetHandler)
         {
             dependedFacetHandlers.Add(facetHandler.name, facetHandler);
+            set;
         }
+        #endregion
 
         ///    
         ///	 <summary> * Gets a depended facet handler </summary>

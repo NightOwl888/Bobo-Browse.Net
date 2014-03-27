@@ -34,6 +34,13 @@ using Lucene.Net.Util;
 
 namespace BoboBrowse.Search
 {
+    using System;
+    using System.Collections.Generic;
+    using Common.Logging;
+    using Lucene.Net.Search;
+    using Lucene.Net.Util;
+    using BoboBrowse.Net.Facets;
+
     public class SortedHitQueue : PriorityQueue
     {
         private static readonly log4net.ILog logger = LogManager.GetLogger(typeof(SortedHitQueue));
